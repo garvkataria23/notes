@@ -1,26 +1,26 @@
 21 Practical Statements :
 
-1. Log File Creator  
-2. Custom HotKey Actions  
-3. Calculator  
-4. Basic GUI File Opener  
-5. Text Repeater  
-6. Automate Folder Creator  
-7. Automated Window Resizer  
-8. Simple Process Checker  
-9. Temporary File Cleaner  
-10. Window Title Logger  
-11. Folder Size Calculator  
-12. Window Focus Checker  
-13. Simple Text File Reader  
-14. Simple Screenshot Tool  
-15. Basic Countdown Timer  
-16. Desktop Cleaner Helper  
-17. Custom Shutdown Timer  
-18. Random Password Generator  
-19. Start Notepad and Calculator  
-20. Regex  
-21. Create Own Notepad
+1. Log File Creator - Line 25  
+2. Custom HotKey Actions - Line 34  
+3. Calculator - Line 65  
+4. Basic GUI File Opener - Line 127  
+5. Text Repeater - Line 167  
+6. Automate Folder Creator - Line 197  
+7. Automated Window Resizer - Line 234  
+8. Simple Process Checker - Line 265  
+9. Temporary File Cleaner - Line 288  
+10. Window Title Logger - Line 323  
+11. Folder Size Calculator - Line 356  
+12. Window Focus Checker - Line 411  
+13. Simple Text File Reader - Line 445  
+14. Simple Screenshot Tool - Line 507  
+15. Basic Countdown Timer - Line 539  
+16. Desktop Cleaner Helper - Line 574  
+17. Custom Shutdown Timer - Line 595  
+18. Random Password Generator - Line 628  
+19. Start Notepad and Calculator - Line 658  
+20. Regex - Line 666  
+21. Create Own Notepad - Line 682
 
 1) Question: Log File Creator
 
