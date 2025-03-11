@@ -1,5 +1,27 @@
 21 Practical Statements :
 
+1. Log File Creator  
+2. Custom HotKey Actions  
+3. Calculator  
+4. Basic GUI File Opener  
+5. Text Repeater  
+6. Automate Folder Creator  
+7. Automated Window Resizer  
+8. Simple Process Checker  
+9. Temporary File Cleaner  
+10. Window Title Logger  
+11. Folder Size Calculator  
+12. Window Focus Checker  
+13. Simple Text File Reader  
+14. Simple Screenshot Tool  
+15. Basic Countdown Timer  
+16. Desktop Cleaner Helper  
+17. Custom Shutdown Timer  
+18. Random Password Generator  
+19. Start Notepad and Calculator  
+20. Regex  
+21. Create Own Notepad
+
 1) Question: Log File Creator
 
 $file = "script_log.txt"
