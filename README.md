@@ -1,4 +1,4 @@
-20 Practical Statements :
+21 Practical Statements :
 
 1) Question: Log File Creator
 
@@ -518,38 +518,31 @@ Question 15) Basic Countdown Timer
 
 #include <GUIConstantsEx.au3>
 #include <MsgBoxConstants.au3>
-#include <StaticConstants.au3> ; Include this for $GUI_SS_DEFAULT_LABEL
 
-; Create GUI
-$hGUI = GUICreate("Countdown Timer", 300, 150)
-GUICtrlCreateLabel("Set Timer (Seconds):", 10, 20, 150, 20)
-$inputTime = GUICtrlCreateInput("", 150, 20, 100, 20)
-$btnStart = GUICtrlCreateButton("Start Timer", 100, 60, 100, 30)
-$lblCountdown = GUICtrlCreateLabel("", 100, 100, 100, 20, $GUI_SS_DEFAULT_LABEL)
+$gui = GUICreate("Timer", 250, 130)
+GUICtrlCreateLabel("Time (Sec):", 10, 20, 100, 20)
+$input = GUICtrlCreateInput("", 100, 20, 80, 20)
+$btn = GUICtrlCreateButton("Start", 90, 60, 70, 30)
+$lbl = GUICtrlCreateLabel("", 90, 100, 100, 20)
 
-GUISetState(@SW_SHOW, $hGUI)
+GUISetState(@SW_SHOW)
 
-; Event loop
 While 1
     Switch GUIGetMsg()
         Case $GUI_EVENT_CLOSE
             Exit
-
-        Case $btnStart
-            ; Get the time input and validate
-            Local $inputValue = GUICtrlRead($inputTime)
-            If StringIsInt($inputValue) And $inputValue > 0 Then
-                Local $timeLeft = Int($inputValue) ; Convert the input to an integer
-                ; Start the countdown
-                While $timeLeft > 0
-                    GUICtrlSetData($lblCountdown, $timeLeft & " seconds remaining")
-                    Sleep(1000) ; Wait for 1 second
-                    $timeLeft -= 1 ; Decrease time by 1 second
+        Case $btn
+            Local $t = Int(GUICtrlRead($input))
+            If $t > 0 Then
+                While $t > 0
+                    GUICtrlSetData($lbl, $t & " sec left")
+                    Sleep(1000)
+                    $t -= 1  ; Corrected decrement
                 WEnd
-                MsgBox($MB_ICONINFORMATION, "Time's Up!", "The countdown has reached zero!")
-                GUICtrlSetData($lblCountdown, "")
+                MsgBox(64, "Time's Up!", "Countdown finished!")
+                GUICtrlSetData($lbl, "")
             Else
-                MsgBox($MB_ICONERROR, "Error", "Please enter a valid positive number of seconds.")
+                MsgBox(16, "Error", "Enter a valid number.")
             EndIf
     EndSwitch
 WEnd
@@ -581,42 +574,31 @@ Question 17) Custom Shutdown Timer
 
 #include <GUIConstantsEx.au3>
 
-; Create GUI
-$gui = GUICreate("Custom Shutdown Timer", 300, 150)
-GUICtrlCreateLabel("Enter shutdown time in minutes:", 20, 20, 250, 20)
+$gui = GUICreate("Shutdown Timer", 300, 150)
+GUICtrlCreateLabel("Enter time (minutes):", 20, 20, 250, 20)
 $input = GUICtrlCreateInput("", 20, 50, 100, 20)
-$shutdownButton = GUICtrlCreateButton("Schedule Shutdown", 20, 90, 120, 30)
-$cancelButton = GUICtrlCreateButton("Cancel Shutdown", 150, 90, 120, 30)
+$btnSet = GUICtrlCreateButton("Set", 20, 90, 80, 30)
+$btnCancel = GUICtrlCreateButton("Cancel", 120, 90, 80, 30)
 
 GUISetState(@SW_SHOW)
 
 While 1
-    $msg = GUIGetMsg()
-    Select
-        Case $msg = $GUI_EVENT_CLOSE
+    Switch GUIGetMsg()
+        Case $GUI_EVENT_CLOSE
             ExitLoop
-
-        Case $msg = $shutdownButton
-            ; Get the input time and validate
-            $minutes = GUICtrlRead($input)
-            If StringIsInt($minutes) And $minutes > 0 Then
-                ; Convert minutes to seconds
-                $seconds = $minutes * 60
-                ; Schedule shutdown
-                Run(@ComSpec & " /c shutdown -s -t " & $seconds, "", @SW_HIDE)
-                MsgBox(64, "Shutdown Scheduled", "System will shut down in " & $minutes & " minute(s).")
+        Case $btnSet
+            If StringIsInt(GUICtrlRead($input)) And GUICtrlRead($input) > 0 Then
+                Run(@ComSpec & " /c shutdown -s -t " & GUICtrlRead($input) * 60, "", @SW_HIDE)
+                MsgBox(64, "Shutdown", "Shutting down in " & GUICtrlRead($input) & " min(s).")
             Else
-                MsgBox(16, "Invalid Input", "Please enter a valid positive integer.")
+                MsgBox(16, "Error", "Enter a valid number.")
             EndIf
-
-        Case $msg = $cancelButton
-            ; Cancel any scheduled shutdown
+        Case $btnCancel
             Run(@ComSpec & " /c shutdown -a", "", @SW_HIDE)
-            MsgBox(64, "Shutdown Cancelled", "Any scheduled shutdown has been canceled.")
-    EndSelect
+            MsgBox(64, "Cancelled", "Shutdown canceled.")
+    EndSwitch
 WEnd
 
-; Cleanup
 GUIDelete($gui)
 Exit
 
@@ -648,14 +630,18 @@ MsgBox($MB_ICONINFORMATION, "Generated Password", "Your password: " & @CRLF & Ge
 
 
 
+
 Scripts:
+
+19) Start Notepad and Calculator
 
 RunWait('Calc')
 RunWait('Notepad')
-MsgBox(64,'Functions','I, Sudharsana started a calculator and notepad')
+MsgBox(64,'Functions','I, Garv started a calculator and notepad')
 
 
 
+20) Regex
 
 #include <MsgBoxConstants.au3>
 #include <StringConstants.au3>
@@ -671,7 +657,40 @@ If Not @error Then
 EndIf
 
 
+21) Create own notepad
 
+#include <GUIConstantsEx.au3>
+#include <FileConstants.au3>
 
+Global Const $ES_MULTILINE = 0x0004 ; Allows multiple lines in the text editor
+Global Const $WS_VSCROLL = 0x00200000 ; Enables vertical scrolling in the edit box
 
+; Create GUI
+Global $gui = GUICreate("Notepad", 500, 400)
+Global $edit = GUICtrlCreateEdit("", 10, 10, 480, 330, $ES_MULTILINE + $WS_VSCROLL)
+Global $btnOpen = GUICtrlCreateButton("Open", 10, 350, 80, 30)
+Global $btnSave = GUICtrlCreateButton("Save", 100, 350, 80, 30)
 
+GUISetState(@SW_SHOW)
+
+While 1
+    Switch GUIGetMsg()
+        Case $GUI_EVENT_CLOSE
+            Exit
+        Case $btnOpen
+            Local $file = FileOpenDialog("Open File", @ScriptDir, "Text Files (*.txt)", $FD_FILEMUSTEXIST)
+            If @error = 0 Then
+                Local $hFile = FileOpen($file, $FO_READ)
+                Local $content = FileRead($hFile)
+                FileClose($hFile)
+                GUICtrlSetData($edit, $content)
+            EndIf
+        Case $btnSave
+            Local $file = FileSaveDialog("Save File", @ScriptDir, "Text Files (*.txt)", 2)
+            If @error = 0 Then
+                Local $hFile = FileOpen($file, $FO_OVERWRITE + $FO_CREATEPATH)
+                FileWrite($hFile, GUICtrlRead($edit))
+                FileClose($hFile)
+            EndIf
+    EndSwitch
+WEnd
